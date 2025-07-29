@@ -180,13 +180,6 @@ const PropertyDetailPage = () => {
                 </span>
               </li>
               <li>
-                Garasi:{" "}
-                <span className="text-yellow-700 font-semibold">
-                  {/* Perbaikan typo: garasi true = ada */}
-                  {property.spesifikasi.garasi ? "Ada" : "Tidak Ada"}
-                </span>
-              </li>
-              <li>
                 Listrik:{" "}
                 <span className="text-green-700 font-semibold">
                   {property.spesifikasi.listrik || "-"}
