@@ -19,7 +19,7 @@ const SimilarListing = ({ excludeId }) => {
       let data = res.data.data || res.data;
       // Filter properti yang sedang dibuka
       if (excludeId) {
-        data = data.filter((item) => String(item.id) !== String(excludeId));
+        data = data.filter((item) => slugify(item.nama) !== slugify(excludeId));
       }
       // Ambil 4 teratas
       setPropertyData({ data: data.slice(0, 4), totalPages: 1 });
@@ -77,7 +77,6 @@ const SimilarListing = ({ excludeId }) => {
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs mb-2">
                   <span className="bg-yellow-200/60 text-yellow-700 px-2 py-1 rounded-full">
-                    {property.lokasi}
                   </span>
                   <span className="bg-orange-200/60 text-orange-700 px-2 py-1 rounded-full">
                     Rp {property.hargaMulai?.toLocaleString("id-ID")}

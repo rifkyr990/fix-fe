@@ -39,6 +39,7 @@ const PropertyDetailPage = () => {
           location: matched.lokasi,
           price: matched.hargaMulai,
           img: matched.thumbnail,
+          type: matched.type,
           images: matched.gambarLainnya || [],
           description: matched.deskripsi,
           spesifikasi: matched.spesifikasi || {},
@@ -83,7 +84,7 @@ const PropertyDetailPage = () => {
         >
           {/* Responsif heading */}
           <h1 className="text-4xl md:text-6xl font-extrabold my-10 text-white drop-shadow-lg text-center">
-            {property.name}
+            {property.name} {property.type}
           </h1>
 
           {/* Main Image: height responsif */}
@@ -227,7 +228,7 @@ const PropertyDetailPage = () => {
         </div>
 
         <div className="relative z-10 max-w-[1500px] w-full mx-auto px-4 mt-16 mb-10">
-          <SimilarListing excludeId={params.id} />
+          <SimilarListing excludeId={params.slug} />
         </div>
       </div>
       <Footer />

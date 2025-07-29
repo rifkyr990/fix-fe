@@ -18,7 +18,7 @@ export default function FindPlace() {
   // Opsi filter
   const filterOptionsArr = [
     { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah Majan", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
-    { label: "Type", state: type, setter: setType, options: ["Cluster", "Townhouse", "Type 50"] },
+    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
     { label: "Harga Min", state: hargaMin, setter: setHargaMin, options: [] },
     { label: "Harga Max", state: hargaMax, setter: setHargaMax, options: [] },
   ];
@@ -131,7 +131,7 @@ export default function FindPlace() {
                 loading="lazy"
               />
               <div className="p-5 flex flex-col flex-1">
-                <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama}</h2>
+                <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama} {p.type}</h2>
                 <div className="text-sm text-gray-600 mb-2">
                   Rp {p.hargaMulai.toLocaleString("id-ID")}
                   {p.spesifikasi?.luasBangunan && ` · ${p.spesifikasi.luasBangunan} m²`}
