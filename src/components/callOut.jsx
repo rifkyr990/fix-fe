@@ -24,6 +24,7 @@ const CallOut = () => {
                     Graha Gloria Group berkomitmen menghadirkan hunian berkualitas dengan desain modern, lingkungan asri, dan nilai investasi tinggi. Temukan rumah yang nyaman, aman, dan sesuai kebutuhan keluarga Anda bersama kami. Percayakan masa depan hunian Anda pada pengembang terpercaya!
                 </p>
                 <div className="flip-card" style={{ perspective: '800px' }}>
+                    <Link href="/contact">
                     <button href="/contact" className="flip-card-inner" tabIndex={0}>
                         <span className="flip-card-front">
                             Pelajari lebih lanjut
@@ -34,6 +35,7 @@ const CallOut = () => {
                             <span className="icon">💬</span>
                         </span>
                     </button>
+                    </Link>
                     <style jsx>{`
                         .flip-card {
                             display: inline-block;
