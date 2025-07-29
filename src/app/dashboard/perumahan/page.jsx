@@ -16,7 +16,7 @@ const Button = ({ children, ...props }) => (
   </button>
 );
 
-const TYPE_OPTIONS = ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko"];
+const TYPE_OPTIONS = ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"];
 
 const PERUM_OPTION = [
   {
@@ -44,6 +44,7 @@ const Page = () => {
     hargaMulai: "",
     deskripsi: "",
     type: "",
+    customType: "",
     spesifikasi: {
       luasTanah: "",
       luasBangunan: "",
@@ -162,7 +163,11 @@ const Page = () => {
     data.append("lokasi", formData.lokasi);
     data.append("hargaMulai", formData.hargaMulai);
     data.append("deskripsi", formData.deskripsi);
-    data.append("type", formData.type);
+    
+    // Jika type Custom, gunakan customType, jika tidak gunakan type biasa
+    const finalType = formData.type === "Custom" ? formData.customType : formData.type;
+    data.append("type", finalType);
+    
     data.append("spesifikasi", JSON.stringify(formData.spesifikasi));
     data.append("fasilitasIds", JSON.stringify(formData.fasilitasIds));
 
@@ -207,7 +212,8 @@ const Page = () => {
       lokasi: item.lokasi,
       hargaMulai: item.hargaMulai,
       deskripsi: item.deskripsi,
-      type: item.type,
+      type: TYPE_OPTIONS.includes(item.type) ? item.type : "Custom",
+      customType: TYPE_OPTIONS.includes(item.type) ? "" : item.type,
       spesifikasi: item.spesifikasi || {
         luasTanah: "",
         luasBangunan: "",
@@ -241,6 +247,7 @@ const Page = () => {
       hargaMulai: "",
       deskripsi: "",
       type: "",
+      customType: "",
       spesifikasi: {
         luasTanah: "",
         luasBangunan: "",
@@ -484,6 +491,24 @@ const Page = () => {
                         </option>
                       ))}
                     </select>
+                    
+                    {/* Input manual jika Custom dipilih */}
+                    {formData.type === "Custom" && (
+                      <div className="mt-2">
+                        <label className="block text-sm text-gray-700 mb-1">
+                          Type Custom (isi manual)
+                        </label>
+                        <input
+                          type="text"
+                          name="customType"
+                          value={formData.customType || ""}
+                          onChange={handleChange}
+                          placeholder="Masukkan type custom"
+                          className="w-full p-2 border border-gray-300 rounded"
+                          required
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </fieldset>
