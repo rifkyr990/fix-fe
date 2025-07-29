@@ -5,7 +5,7 @@ const WhatsappSticky = () => {
   return (
     <div>
       <a
-        href="https://wa.me/6285645353662?text=Halo%20Graha%20Gloria%2C%20saya%20ingin%20konsultasi%20properti"
+        href="https://wa.me/6281333993088?text=Halo%20Graha%20Gloria%2C%20saya%20ingin%20konsultasi%20properti"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed z-50 bottom-6 right-6 flex items-end group"
