@@ -121,7 +121,7 @@ export default function FindPlace() {
           properties.map((p) => (
             <Link
               key={p.id}
-              href={`/property/${slugify(p.nama, { lower: true })}`}
+              href={`/property/${p.id}-${slugify(p.nama, { lower: true })}`}
               className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-300"
             >
               <img

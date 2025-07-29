@@ -27,7 +27,16 @@ const PropertyDetailPage = () => {
         const res = await api.get('/perumahan');
         const allProperties = res.data?.data || [];
 
-        const matched = allProperties.find((p) => slugify(p.nama) === slug);
+        let matched;
+        
+        // Cek apakah slug mengandung ID (format: id-nama-properti)
+        if (slug.includes('-') && /^\d+/.test(slug)) {
+          const id = slug.split('-')[0];
+          matched = allProperties.find((p) => String(p.id) === id);
+        } else {
+          // Fallback ke slug biasa
+          matched = allProperties.find((p) => slugify(p.nama) === slug);
+        }
 
         if (!matched) {
           setError("Properti tidak ditemukan.");
@@ -227,7 +236,7 @@ const PropertyDetailPage = () => {
         </div>
 
         <div className="relative z-10 max-w-[1500px] w-full mx-auto px-4 mt-16 mb-10">
-          <SimilarListing excludeId={params.id} />
+          <SimilarListing excludeId={params?.slug?.split('-')[0]} />
         </div>
       </div>
       <Footer />
