@@ -37,7 +37,7 @@ const Page = () => {
       dispatch(setSignIn(user));
   
       console.log("Redirecting to dashboard...");
-      router.push("/dashboard/");
+      router.push("/dashboard/blog");
     } catch (error) {
       console.error("Login error:", error);
       alert("Login gagal. Cek kembali email dan password.");
