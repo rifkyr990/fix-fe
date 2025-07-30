@@ -122,12 +122,23 @@ export default function BlogDetailPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-green-900/40 via-transparent to-transparent pointer-events-none" />
             </div>
 
+            {/* Headline/Summary */}
+            {blog.summary && (
+              <section className="bg-gradient-to-r from-[#BFA14A]/10 via-[#e8f5e9] to-[#BFA14A]/10 rounded-xl p-6 sm:p-8 mb-8 border border-[#BFA14A]/20">
+                <h2 className="text-xl font-bold text-[#388e3c] mb-4">Ringkasan</h2>
+                <p className="text-lg text-gray-700 leading-relaxed font-medium italic">
+                  {blog.summary}
+                </p>
+              </section>
+            )}
+
             {/* Konten utama */}
-            <section
-              className="prose prose-lg max-w-none bg-white/90 rounded-xl p-6 sm:p-8 shadow-xl mb-12 text-gray-900 border-l-4 border-[#43a047]"
-              style={{ backdropFilter: "blur(2px)" }}
-              dangerouslySetInnerHTML={{ __html: blog.content || "" }}
-            />
+            <section className="prose prose-lg prose-green max-w-none bg-white/95 rounded-xl p-8 sm:p-10 shadow-xl mb-12 border-l-4 border-[#43a047]">
+              <div 
+                className="text-gray-800 leading-relaxed prose-headings:text-[#388e3c] prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-6 prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h3:text-xl prose-h3:mb-3 prose-p:mb-4 prose-strong:text-[#BFA14A] prose-a:text-[#43a047] prose-a:no-underline hover:prose-a:underline"
+                dangerouslySetInnerHTML={{ __html: blog.content || "" }}
+              />
+            </section>
           </article>
 
           {/* SIDEBAR OTHER ARTICLE */}
