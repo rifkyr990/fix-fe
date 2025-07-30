@@ -17,14 +17,20 @@ const SimilarListing = ({ excludeId }) => {
         params: { page: 1 },
       });
       let data = res.data.data || res.data;
+      console.log("All properties:", data);
+      console.log("Exclude ID:", excludeId);
+      
       // Filter properti yang sedang dibuka
       if (excludeId) {
         data = data.filter((item) => slugify(item.nama) !== slugify(excludeId));
       }
+      console.log("Filtered properties:", data);
+      
       // Ambil 4 teratas
       setPropertyData({ data: data.slice(0, 4), totalPages: 1 });
       setLoading(false);
     } catch (err) {
+      console.error("Error fetching:", err);
       setError("Gagal fetch data properti serupa.");
       setLoading(false);
     }
@@ -34,7 +40,7 @@ const SimilarListing = ({ excludeId }) => {
     setLoading(true);
     setError(null);
     fetchRandom();
-  }, []);
+  }, [excludeId]); // Tambahkan excludeId sebagai dependency
 
   if (error)
     return <div className="text-center py-20 text-red-500">{error}</div>;
@@ -62,7 +68,7 @@ const SimilarListing = ({ excludeId }) => {
             <div
               key={property.id || idx}
               className="bg-gradient-to-br from-yellow-50 via-orange-50 to-blue-50 rounded-3xl shadow-xl shadow-yellow-100/60 overflow-hidden flex flex-col min-h-[440px] max-h-[440px] min-w-[300px] max-w-[300px] border border-yellow-200 hover:scale-105 transition-transform duration-200 cursor-pointer gap-7 mx-2"
-              onClick={() => router.push(`/property/${property.id}`)}
+              onClick={() => router.push(`/property/${property.id}-${slugify(property.nama, { lower: true, strict: true })}`)}
             >
               <div className="h-[180px] w-[300px] overflow-hidden flex-shrink-0 mx-auto bg-yellow-100">
                 <img
@@ -72,11 +78,12 @@ const SimilarListing = ({ excludeId }) => {
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between gap-2">
-                <div className="font-semibold text-lg text-gray-800 mb-1">
-                  {property.nama}
+                <div className="font-semibold text-md text-gray-800 mb-1">
+                  {property.nama} {property.type}
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs mb-2">
                   <span className="bg-yellow-200/60 text-yellow-700 px-2 py-1 rounded-full">
+                    {property.nama}
                   </span>
                   <span className="bg-orange-200/60 text-orange-700 px-2 py-1 rounded-full">
                     Rp {property.hargaMulai?.toLocaleString("id-ID")}

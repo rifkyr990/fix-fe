@@ -20,7 +20,7 @@ export default function PropertyContactForm() {
             `No HP: ${form.phone}%0A` +
             `Email: ${form.email}%0A` +
             `Pesan: ${form.message}`;
-        const waUrl = `https://wa.me/6285645353662?text=${encodeURIComponent(text)}`;
+        const waUrl = `https://wa.me/6281333993088?text=${encodeURIComponent(text)}`;
         window.open(waUrl, "_blank");
     };
 

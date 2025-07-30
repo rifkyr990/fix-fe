@@ -10,6 +10,7 @@ export default function FindPlace() {
   const [loading, setLoading] = useState(false);
   const [nama, setNama] = useState("");
   const [type, setType] = useState("");
+  const [customType, setCustomType] = useState("");
   const [hargaMin, setHargaMin] = useState("");
   const [hargaMax, setHargaMax] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +19,7 @@ export default function FindPlace() {
   // Opsi filter
   const filterOptionsArr = [
     { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah Majan", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
-    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
+    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"] },
     { label: "Harga Min", state: hargaMin, setter: setHargaMin, options: [] },
     { label: "Harga Max", state: hargaMax, setter: setHargaMax, options: [] },
   ];
@@ -28,7 +29,7 @@ export default function FindPlace() {
     try {
       const params = new URLSearchParams();
       if (nama) params.append("nama", nama);
-      if (type) params.append("type", type);
+      if (type) params.append("type", type === "Custom" ? customType : type);
       if (hargaMin) params.append("hargaMin", hargaMin);
       if (hargaMax) params.append("hargaMax", hargaMax);
       params.append("page", currentPage);
@@ -45,7 +46,7 @@ export default function FindPlace() {
 
   useEffect(() => {
     fetchData();
-  }, [nama, type, hargaMin, hargaMax, currentPage]);
+  }, [nama, type, customType, hargaMin, hargaMax, currentPage]);
 
   return (
     <div className="bg-[#f5f5f7] min-h-screen flex flex-col items-center py-8 px-6 sm:px-12 md:px-40 lg:px-56">
@@ -81,6 +82,15 @@ export default function FindPlace() {
                 placeholder={`Masukkan ${label.toLowerCase()}`}
                 className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 min="0"
+              />
+            )}
+            {label === "Type" && state === "Custom" && (
+              <input
+                type="text"
+                value={customType}
+                onChange={(e) => setCustomType(e.target.value)}
+                placeholder="Contoh: Type 36, Type 45, dll"
+                className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
               />
             )}
           </div>
@@ -121,7 +131,7 @@ export default function FindPlace() {
           properties.map((p) => (
             <Link
               key={p.id}
-              href={`/property/${slugify(p.nama, { lower: true })}`}
+              href={`/property/${p.id}-${slugify(p.nama, { lower: true })}`}
               className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-300"
             >
               <img
