@@ -13,7 +13,7 @@ const Header = () => {
 
   const pathToTitle = {
     "/": "Beranda",
-    "/dashboard": "Dashboard",
+    // "/dashboard": "Dashboard",
     "/dashboard/blog": "Blog",
     "/dashboard/perumahan": "Perumahan",
     "/dashboard/fasilitas": "Fasilitas",

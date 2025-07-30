@@ -24,7 +24,7 @@ export default function FindPlace() {
     { label: "Harga Max", state: hargaMax, setter: setHargaMax, options: [] },
   ];
 
-  const fetchData = async () => {
+  const fetchData = async (page = currentPage) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -32,20 +32,33 @@ export default function FindPlace() {
       if (type) params.append("type", type === "Custom" ? customType : type);
       if (hargaMin) params.append("hargaMin", hargaMin);
       if (hargaMax) params.append("hargaMax", hargaMax);
-      params.append("page", currentPage);
+      params.append("page", page);
+      params.append("limit", 6);
 
+      console.log("API Request params:", params.toString());
       const res = await api.get(`/perumahan/filter?${params.toString()}`);
+      console.log("API Response:", res.data);
+      
       const { data, totalPages: tp } = res.data;
-      setProperties(data);
+      console.log("Properties data:", data);
+      console.log("Total pages:", tp);
+      
+      setProperties(data || []);
       setTotalPages(tp || 1);
     } catch (err) {
       console.error("Fetch error:", err);
+      setProperties([]);
+      setTotalPages(1);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
+    setCurrentPage(1);
+  }, [nama, type, customType, hargaMin, hargaMax]);
+
+  useEffect(() => {
+    fetchData(currentPage);
   }, [nama, type, customType, hargaMin, hargaMax, currentPage]);
 
   return (

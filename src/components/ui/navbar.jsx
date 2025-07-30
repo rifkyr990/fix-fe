@@ -193,7 +193,7 @@ export default function Navbar() {
                   {isLogin ? (
                     <>
                       <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/dashboard">Dashboard</Link>
+                        <Link href="/dashboard/blog">Dashboard</Link>
                       </li>
                       <li className="px-4 py-2 hover:bg-gray-100">
                         <button onClick={handleLogout}>Logout</button>

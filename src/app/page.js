@@ -9,6 +9,7 @@ import Footer from "@/components/ui/footer";
 import FindPlace from "@/components/findPlace";
 import SplashScreen from "@/components/ui/SplashScreen";
 import { motion } from "framer-motion";
+import NewsSection from "@/components/newsSection";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -34,6 +35,9 @@ export default function Home() {
             </section>
             <section id="proyek1">
               <FindPlace />
+            </section>
+            <section id="news">
+              <NewsSection />
             </section>
             <section id="callout">
               <CallOut />
