@@ -180,7 +180,7 @@ export default function AboutPage() {
           </p>
           <div className="pb-12"> 
             <a
-              href="https://api.whatsapp.com/send?phone=+6285645353662&text=Halo%20Graha%20Gloria%2C%20saya%20tertarik%20untuk%20memiliki%20hunian%20di%20Graha%20Gloria%20Group.%20Tolong%20informasikan%20lebih%20lanjut%20mengenai%20hunian%20tersebut."
+              href="https://api.whatsapp.com/send?phone=6281333993088&text=Halo%20Graha%20Gloria%2C%20saya%20tertarik%20untuk%20memiliki%20hunian%20di%20Graha%20Gloria%20Group.%20Tolong%20informasikan%20lebih%20lanjut%20mengenai%20hunian%20tersebut."
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center gap-2"

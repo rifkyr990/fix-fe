@@ -21,6 +21,10 @@ const AboutSection = () => {
             const [showVideo, setShowVideo] = React.useState(false);
             const [loading, setLoading] = React.useState(false);
             const [iframeLoaded, setIframeLoaded] = React.useState(false);
+            const [isFullscreen, setIsFullscreen] = React.useState(false);
+            const [showFullscreenButton, setShowFullscreenButton] = React.useState(true);
+            const videoContainerRef = React.useRef(null);
+            const hideButtonTimeoutRef = React.useRef(null);
 
             // Handler ketika tombol play di klik
             const handlePlayClick = () => {
@@ -28,10 +32,81 @@ const AboutSection = () => {
               setShowVideo(true);
             };
 
+            // Handler untuk fullscreen
+            const handleFullscreen = () => {
+              if (!videoContainerRef.current) return;
+              
+              if (!isFullscreen) {
+                if (videoContainerRef.current.requestFullscreen) {
+                  videoContainerRef.current.requestFullscreen();
+                } else if (videoContainerRef.current.webkitRequestFullscreen) {
+                  videoContainerRef.current.webkitRequestFullscreen();
+                } else if (videoContainerRef.current.msRequestFullscreen) {
+                  videoContainerRef.current.msRequestFullscreen();
+                }
+              } else {
+                if (document.exitFullscreen) {
+                  document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                  document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                  document.msExitFullscreen();
+                }
+              }
+            };
+
+            // Handler untuk mouse enter/leave
+            const handleMouseEnter = () => {
+              setShowFullscreenButton(true);
+              if (hideButtonTimeoutRef.current) {
+                clearTimeout(hideButtonTimeoutRef.current);
+              }
+            };
+
+            const handleMouseLeave = () => {
+              hideButtonTimeoutRef.current = setTimeout(() => {
+                setShowFullscreenButton(false);
+              }, 3000);
+            };
+
+            // Listen untuk perubahan fullscreen
+            React.useEffect(() => {
+              const handleFullscreenChange = () => {
+                setIsFullscreen(!!document.fullscreenElement);
+              };
+
+              document.addEventListener('fullscreenchange', handleFullscreenChange);
+              document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+              document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+              return () => {
+                document.removeEventListener('fullscreenchange', handleFullscreenChange);
+                document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+                document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+                if (hideButtonTimeoutRef.current) {
+                  clearTimeout(hideButtonTimeoutRef.current);
+                }
+              };
+            }, []);
+
+            // Auto hide button setelah 3 detik saat video dimuat
+            React.useEffect(() => {
+              if (iframeLoaded) {
+                hideButtonTimeoutRef.current = setTimeout(() => {
+                  setShowFullscreenButton(false);
+                }, 3000);
+              }
+            }, [iframeLoaded]);
+
             // Jika showVideo true, render iframe dan loading spinner jika belum loaded
             if (showVideo) {
               return (
-                <div className="w-full h-full relative">
+                <div 
+                  ref={videoContainerRef}
+                  className={`w-full h-full relative ${isFullscreen ? 'bg-black' : ''}`}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   {!iframeLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center z-1 bg-black bg-opacity-60 rounded-tr-4xl">
                       <div className="flex flex-col items-center">
@@ -61,8 +136,28 @@ const AboutSection = () => {
                       </div>
                     </div>
                   )}
+                  
+                  {/* Fullscreen Button */}
+                  <button
+                    onClick={handleFullscreen}
+                    className={`absolute bottom-1 md:bottom-1 lg:bottom-1 right-0 md:right-34 lg:right-34 z-20 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-300 ${
+                      showFullscreenButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+                    }`}
+                    title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                  >
+                    {isFullscreen ? (
+                      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                      </svg>
+                    )}
+                  </button>
+
                   <iframe
-                    className="w-full h-full rounded-tr-4xl z-10"
+                    className={`w-full h-full z-10 ${isFullscreen ? 'rounded-none' : 'rounded-tr-4xl'}`}
                     src="https://screenpal.com/player/cTirDUnIhvQ?autoplay=1"
                     title="Tentang GGG"
                     allow="autoplay; fullscreen"

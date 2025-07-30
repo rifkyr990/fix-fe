@@ -140,7 +140,15 @@ const HeroSection = () => {
       {/* CTA Button */}
       <div className="absolute left-1/2 bottom-0 -translate-x-1/2 z-[30] w-[95vw] sm:w-[90vw] md:w-[80vw] max-w-[1200px] px-2 md:px-0">
         <div className="bg-white p-4 sm:p-6 md:p-8 md:px-10 flex items-center justify-center md:justify-start">
-          <button className="bg-transparent border-none text-gray-900 font-bold text-lg sm:text-xl cursor-pointer flex items-center gap-2 focus:outline-none">
+          <button 
+            className="bg-transparent border-none text-gray-900 font-bold text-lg sm:text-xl cursor-pointer flex items-center gap-2 focus:outline-none"
+            onClick={() => {
+              const element = document.getElementById('proyek1');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
             See all listings
             <span className="text-[#FFAC12] text-2xl sm:text-3xl ml-2 text-shadow-lg">
               →

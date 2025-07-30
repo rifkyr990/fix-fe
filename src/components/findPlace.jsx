@@ -10,6 +10,7 @@ export default function FindPlace() {
   const [loading, setLoading] = useState(false);
   const [nama, setNama] = useState("");
   const [type, setType] = useState("");
+  const [customType, setCustomType] = useState("");
   const [hargaMin, setHargaMin] = useState("");
   const [hargaMax, setHargaMax] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,34 +19,47 @@ export default function FindPlace() {
   // Opsi filter
   const filterOptionsArr = [
     { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah Majan", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
-    { label: "Type", state: type, setter: setType, options: ["Cluster", "Townhouse", "Type 50"] },
+    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"] },
     { label: "Harga Min", state: hargaMin, setter: setHargaMin, options: [] },
     { label: "Harga Max", state: hargaMax, setter: setHargaMax, options: [] },
   ];
 
-  const fetchData = async () => {
+  const fetchData = async (page = currentPage) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
       if (nama) params.append("nama", nama);
-      if (type) params.append("type", type);
+      if (type) params.append("type", type === "Custom" ? customType : type);
       if (hargaMin) params.append("hargaMin", hargaMin);
       if (hargaMax) params.append("hargaMax", hargaMax);
-      params.append("page", currentPage);
+      params.append("page", page);
+      params.append("limit", 6);
 
+      console.log("API Request params:", params.toString());
       const res = await api.get(`/perumahan/filter?${params.toString()}`);
+      console.log("API Response:", res.data);
+      
       const { data, totalPages: tp } = res.data;
-      setProperties(data);
+      console.log("Properties data:", data);
+      console.log("Total pages:", tp);
+      
+      setProperties(data || []);
       setTotalPages(tp || 1);
     } catch (err) {
       console.error("Fetch error:", err);
+      setProperties([]);
+      setTotalPages(1);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
-  }, [nama, type, hargaMin, hargaMax, currentPage]);
+    setCurrentPage(1);
+  }, [nama, type, customType, hargaMin, hargaMax]);
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [nama, type, customType, hargaMin, hargaMax, currentPage]);
 
   return (
     <div className="bg-[#f5f5f7] min-h-screen flex flex-col items-center py-8 px-6 sm:px-12 md:px-40 lg:px-56">
@@ -81,6 +95,15 @@ export default function FindPlace() {
                 placeholder={`Masukkan ${label.toLowerCase()}`}
                 className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 min="0"
+              />
+            )}
+            {label === "Type" && state === "Custom" && (
+              <input
+                type="text"
+                value={customType}
+                onChange={(e) => setCustomType(e.target.value)}
+                placeholder="Contoh: Type 36, Type 45, dll"
+                className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
               />
             )}
           </div>
@@ -121,7 +144,7 @@ export default function FindPlace() {
           properties.map((p) => (
             <Link
               key={p.id}
-              href={`/property/${slugify(p.nama, { lower: true })}`}
+              href={`/property/${p.id}-${slugify(p.nama, { lower: true })}`}
               className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-300"
             >
               <img
@@ -131,7 +154,7 @@ export default function FindPlace() {
                 loading="lazy"
               />
               <div className="p-5 flex flex-col flex-1">
-                <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama}</h2>
+                <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama} {p.type}</h2>
                 <div className="text-sm text-gray-600 mb-2">
                   Rp {p.hargaMulai.toLocaleString("id-ID")}
                   {p.spesifikasi?.luasBangunan && ` · ${p.spesifikasi.luasBangunan} m²`}
