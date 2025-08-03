@@ -30,6 +30,20 @@ body {
   backface-visibility: hidden;
 }
 
+.swiper-pagination-bullet {
+  background: #ccc;
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+  margin: 0 6px;
+}
+
+.swiper-pagination-bullet-active {
+  background: #FFAC12;
+}
+
+
+
 .cube-3d {
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
   transform-style: preserve-3d;

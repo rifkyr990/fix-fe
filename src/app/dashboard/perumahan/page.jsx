@@ -32,7 +32,7 @@ const PERUM_OPTION = [
     lokasi: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3950.187105418415!2d111.907073!3d-8.082391999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMDQnNTYuNiJTIDExMcKwNTQnMjUuNSJF!5e0!3m2!1sid!2sid!4v1753708252103!5m2!1sid!2sid"
   },
   {
-    nama: "Graha Indah Majan",
+    nama: "Graha Indah",
     lokasi: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3950.568167333068!2d111.906572!3d-8.043377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMDInMzYuMiJTIDExMcKwNTQnMjMuNyJF!5e0!3m2!1sid!2sid!4v1753637595305!5m2!1sid!2sid"
   }
 ];
@@ -41,7 +41,7 @@ const Page = () => {
   const [formData, setFormData] = useState({
     nama: "",
     lokasi: "",
-    hargaMulai: "",
+    hargaMulai: "1000000",
     deskripsi: "",
     type: "",
     customType: "",
@@ -357,7 +357,7 @@ const Page = () => {
               </div>
 
               {/* Harga Mulai */}
-              <div>
+              {/* <div>
                 <label
                   htmlFor="hargaMulai"
                   className="block mb-1 text-sm font-medium text-gray-700"
@@ -375,7 +375,7 @@ const Page = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                   min="0"
                 />
-              </div>
+              </div> */}
 
               {/* Spesifikasi */}
               <fieldset className="border p-4 rounded border-gray-300">
@@ -689,10 +689,10 @@ const Page = () => {
                 )}
 
                 <div className="space-y-2 text-sm">
-                  <p>
+                  {/* <p>
                     <span className="font-medium">Harga Mulai:</span> Rp{" "}
                     {Number(selectedPerumahan.hargaMulai).toLocaleString("id-ID")}
-                  </p>
+                  </p> */}
                   <p>
                     <span className="font-medium">Type:</span> {selectedPerumahan.type}
                   </p>
@@ -749,7 +749,7 @@ const Page = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th className="px-4 py-3">Nama</th>
-                  <th className="px-4 py-3">Harga</th>
+                  {/* <th className="px-4 py-3">Harga</th> */}
                   <th className="px-4 py-3 max-w-[200px]">Deskripsi</th>
                   <th className="px-4 py-3">Tanggal</th>
                   <th className="px-4 py-3">Action</th>
@@ -762,9 +762,9 @@ const Page = () => {
                     className="bg-white border-b hover:bg-gray-50"
                   >
                     <td className="px-4 py-2">{item.nama}</td>
-                    <td className="px-4 py-2">
+                    {/* <td className="px-4 py-2">
                       Rp {parseInt(item.hargaMulai).toLocaleString("id-ID")}
-                    </td>
+                    </td> */}
                     <td className="px-4 py-2 truncate max-w-[200px]">
                       {item.deskripsi}
                     </td>

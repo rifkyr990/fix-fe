@@ -46,7 +46,7 @@ const PropertyDetailPage = () => {
         const mapped = {
           name: matched.nama,
           location: matched.lokasi,
-          price: matched.hargaMulai,
+          // price: matched.hargaMulai,
           img: matched.thumbnail,
           type: matched.type,
           images: matched.gambarLainnya || [],
@@ -135,12 +135,12 @@ const PropertyDetailPage = () => {
             </div>
           )}
 
-          <p className="text-2xl font-bold text-yellow-700 mb-6 bg-yellow-50/80 px-4 py-2 rounded-xl inline-block shadow backdrop-blur-[2px]">
+          {/* <p className="text-2xl font-bold text-yellow-700 mb-6 bg-yellow-50/80 px-4 py-2 rounded-xl inline-block shadow backdrop-blur-[2px]">
             Harga mulai:{" "}
             <span className="text-green-700">
               Rp{property.price.toLocaleString()}
             </span>
-          </p>
+          </p> */}
 
           <div className="mb-6 bg-white/60 rounded-xl p-6 shadow border-l-8 border-yellow-400 backdrop-blur-[2px]">
             <h2 className="font-bold text-xl flex items-center gap-2 text-green-800 mb-2">

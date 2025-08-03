@@ -11,55 +11,47 @@ export default function FindPlace() {
   const [nama, setNama] = useState("");
   const [type, setType] = useState("");
   const [customType, setCustomType] = useState("");
-  const [hargaMin, setHargaMin] = useState("");
-  const [hargaMax, setHargaMax] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   // Opsi filter
   const filterOptionsArr = [
-    { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah Majan", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
-    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"] },
-    { label: "Harga Min", state: hargaMin, setter: setHargaMin, options: [] },
-    { label: "Harga Max", state: hargaMax, setter: setHargaMax, options: [] },
+    { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
+    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
   ];
 
-  const fetchData = async (page = currentPage) => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      if (nama) params.append("nama", nama);
-      if (type) params.append("type", type === "Custom" ? customType : type);
-      if (hargaMin) params.append("hargaMin", hargaMin);
-      if (hargaMax) params.append("hargaMax", hargaMax);
-      params.append("page", page);
-      params.append("limit", 6);
+  const fetchData = async (page = 1) => {
+  setLoading(true);
+  try {
+    const params = new URLSearchParams();
+    if (nama) params.append("nama", nama);
+    if (type) params.append("type", type === "Custom" ? customType : type);
+    params.append("page", page);
+    params.append("limit", "6");
 
-      console.log("API Request params:", params.toString());
-      const res = await api.get(`/perumahan/filter?${params.toString()}`);
-      console.log("API Response:", res.data);
-      
-      const { data, totalPages: tp } = res.data;
-      console.log("Properties data:", data);
-      console.log("Total pages:", tp);
-      
-      setProperties(data || []);
-      setTotalPages(tp || 1);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setProperties([]);
-      setTotalPages(1);
-    }
-    setLoading(false);
-  };
+    const res = await api.get(`/perumahan/filter?${params.toString()}`);
+    const { data, totalPages } = res.data;
+
+    console.log("total pages: ",totalPages);
+
+    setProperties(data || []);
+    setTotalPages(totalPages || 1);
+    setCurrentPage(page); // ⬅️ ini penting untuk konsistensi pagination
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    setProperties([]);
+    setTotalPages(1);
+  }
+  setLoading(false);
+};
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [nama, type, customType, hargaMin, hargaMax]);
+  setCurrentPage(1);
+}, [nama, type, customType]);
 
-  useEffect(() => {
-    fetchData(currentPage);
-  }, [nama, type, customType, hargaMin, hargaMax, currentPage]);
+useEffect(() => {
+  fetchData(currentPage);
+}, [nama, type, customType, currentPage]);
 
   return (
     <div className="bg-[#f5f5f7] min-h-screen flex flex-col items-center py-8 px-6 sm:px-12 md:px-40 lg:px-56">
@@ -74,13 +66,13 @@ export default function FindPlace() {
       {/* Filter Bar */}
       <div className="flex flex-wrap gap-4 mb-8 w-full max-w-4xl justify-center">
         {filterOptionsArr.map(({ label, state, setter, options }, idx) => (
-          <div key={idx} className="flex flex-col flex-1 min-w-[140px] max-w-[240px]">
+          <div key={idx} className="flex flex-col flex-1 min-w-[340px] max-w-[440px]">
             <label className="mb-2 text-sm font-medium text-gray-700">{label}</label>
             {options.length ? (
               <select
                 value={state}
                 onChange={(e) => setter(e.target.value)}
-                className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-5 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Pilih {label.toLowerCase()}</option>
                 {options.map((o) => (
