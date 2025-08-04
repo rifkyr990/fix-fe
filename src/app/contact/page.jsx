@@ -71,7 +71,7 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">Telepon</h3>
                   <a href="tel:081333997000" className="text-yellow-600 hover:underline">
-                    0813-3399-7000
+                    +62813-3399-3088
                   </a>
                 </div>
               </div>
