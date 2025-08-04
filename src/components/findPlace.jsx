@@ -16,7 +16,7 @@ export default function FindPlace() {
 
   // Opsi filter
   const filterOptionsArr = [
-    { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
+    { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah.", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
     { label: "Type", state: type, setter: setType, options: ["Type 36","Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
   ];
 
@@ -148,8 +148,8 @@ useEffect(() => {
               <div className="p-5 flex flex-col flex-1">
                 <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama} {p.type}</h2>
                 <div className="text-sm text-gray-600 mb-2">
-                  Rp {p.hargaMulai.toLocaleString("id-ID")}
-                  {p.spesifikasi?.luasBangunan && ` · ${p.spesifikasi.luasBangunan} m²`}
+                  {/* Rp {p.hargaMulai.toLocaleString("id-ID")} */}
+                  Luas : {p.spesifikasi?.luasBangunan && ` · ${p.spesifikasi.luasBangunan} m²`}
                 </div>
                 <div className="flex items-center gap-6 text-gray-500 text-sm mt-auto">
                   <div className="flex items-center gap-1">
