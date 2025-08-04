@@ -52,7 +52,7 @@ export default function ProyekMajanPage() {
           {/* Kelebihan Proyek */}
           <section className="w-full max-w-3xl mx-auto mb-10 px-4">
             <h2 className="text-2xl font-bold text-yellow-400 mb-4 text-center">
-              Kelebihan Graha Indah Majan
+              Kelebihan Graha Indah
             </h2>
             <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-200">
               <li className="flex items-start gap-3">

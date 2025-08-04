@@ -16,7 +16,7 @@ const Button = ({ children, ...props }) => (
   </button>
 );
 
-const TYPE_OPTIONS = ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"];
+const TYPE_OPTIONS = ["Type 36","Type 50", "Type 53", "Type 60", "Type 65", "Ruko", "Custom"];
 
 const PERUM_OPTION = [
   {

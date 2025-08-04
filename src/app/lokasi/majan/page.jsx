@@ -10,7 +10,7 @@ export default function LokasiMajanPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-white to-yellow-100 pt-32 pb-16 flex items-center justify-center">
         <div className="bg-white bg-opacity-90 rounded-3xl shadow-2xl p-10 max-w-4xl w-full border-4 border-yellow-400">
           <h1 className="text-5xl font-extrabold mb-2 text-yellow-500 drop-shadow-lg text-center tracking-wide">
-            Graha Indah Majan
+            Graha Indah
           </h1>
           <div className="w-24 h-1 bg-yellow-400 mx-auto mb-6 rounded-full"></div>
           <div className="mb-6 flex flex-col gap-2 items-center">

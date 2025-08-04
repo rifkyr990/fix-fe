@@ -17,7 +17,7 @@ export default function FindPlace() {
   // Opsi filter
   const filterOptionsArr = [
     { label: "Nama", state: nama, setter: setNama, options: ["Graha Indah", "Graha Indah Beji 1", "Graha Indah Beji 2", "Graha Indah Ketanon"] },
-    { label: "Type", state: type, setter: setType, options: ["Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
+    { label: "Type", state: type, setter: setType, options: ["Type 36","Type 50", "Type 53", "Type 60", "Type 65", "Ruko"] },
   ];
 
   const fetchData = async (page = 1) => {

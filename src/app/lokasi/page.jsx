@@ -8,7 +8,7 @@ const locations = [
   { name: "Graha Indah Beji 1", path: "/lokasi/beji1" },
   { name: "Graha Indah Beji 2", path: "/lokasi/beji2" },
   { name: "Graha Indah Ketanon", path: "/lokasi/ketanon" },
-  { name: "Graha Indah Majan", path: "/lokasi/majan" },
+  { name: "Graha Indah", path: "/lokasi/majan" },
 ];
 
 export default function LokasiPage() {
