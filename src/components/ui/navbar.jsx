@@ -117,7 +117,7 @@ export default function Navbar() {
                     <Link href="/proyek/ketanon">Graha Indah Ketanon</Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-100">
-                    <Link href="/proyek/majan">Graha Indah Majan</Link>
+                    <Link href="/proyek/majan">Graha Indah</Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-100">
                     <Link href="/proyek/beji1">Graha Indah Beji 1</Link>
@@ -153,7 +153,7 @@ export default function Navbar() {
                     <Link href="/lokasi/ketanon">Graha Indah Ketanon</Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-100">
-                    <Link href="/lokasi/majan">Graha Indah Majan</Link>
+                    <Link href="/lokasi/majan">Graha Indah</Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-100">
                     <Link href="/lokasi/beji1">Graha Indah Beji 1</Link>
