@@ -148,7 +148,7 @@ useEffect(() => {
               <div className="p-5 flex flex-col flex-1">
                 <h2 className="font-semibold text-xl text-gray-800 truncate">{p.nama} {p.type}</h2>
                 <div className="text-sm text-gray-600 mb-2">
-                  Rp {p.hargaMulai.toLocaleString("id-ID")}
+                  {/* Rp {p.hargaMulai.toLocaleString("id-ID")} */}
                   {p.spesifikasi?.luasBangunan && ` · ${p.spesifikasi.luasBangunan} m²`}
                 </div>
                 <div className="flex items-center gap-6 text-gray-500 text-sm mt-auto">
