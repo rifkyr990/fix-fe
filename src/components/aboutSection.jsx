@@ -12,6 +12,10 @@ const videos = [
     title: "baru"
   },
   {
+    src: "https://go.screenpal.com/player/cTjlVwn2fRU?width=100%&height=100%&ff=1&title=0&controls=0&a=1&m=1",
+    title: "beji 1"
+  },
+  {
     src: "https://go.screenpal.com/player/cTjeDqnICGq?width=100%&height=100%&ff=1&title=0&controls=0&a=1&m=1&embed=1",
     title: "Tentang GGG - Video 2",
   },

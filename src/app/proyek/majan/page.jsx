@@ -4,8 +4,7 @@ import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 
 const brochureImages = [
-  "/image/proyek/majan/1.png",
-  "/image/proyek/majan/2.png",
+  "/image/proyek/majan/1.png",  
   "/image/proyek/majan/3.png",
   "/image/proyek/majan/4.png",
   "/image/proyek/majan/5.png",
@@ -39,7 +38,7 @@ export default function ProyekMajanPage() {
         {/* Cinema screen */}
         <div className="relative z-10 w-full max-w-full mx-auto bg-gray-900 rounded-2xl shadow-2xl border-4 border-gray-700 p-0 flex flex-col items-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 mb-2 text-center drop-shadow-lg tracking-wide animate-pulse pt-8">
-            Graha Indah Majan
+            Graha Indah
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-6 text-center italic">
             "Hunian Nyaman, Investasi Masa Depan"
