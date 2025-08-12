@@ -12,7 +12,6 @@ const brochureImages = [
   "/image/proyek/ketanon/6.png",
   "/image/proyek/ketanon/7.png",
   "/image/proyek/ketanon/8.png",
-  "/image/proyek/ketanon/9.png",
   "/image/proyek/ketanon/10.png",
   "/image/proyek/ketanon/11.png",
   "/image/proyek/ketanon/12.png",

@@ -49,7 +49,7 @@ export default function LokasiMajanPage() {
           </div>
           <p className="text-center text-blue-900 text-lg font-medium">
             Detail halaman untuk lokasi:{" "}
-            <span className="text-yellow-600 font-bold">Graha Indah Majan</span>
+            <span className="text-yellow-600 font-bold">Graha Indah</span>
           </p>
         </div>
       </div>
